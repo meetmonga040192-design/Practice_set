@@ -12,8 +12,8 @@ provider "azurerm" {
 }
 
 
-resource "azurerm_resource_group" "rgs" {
-  name     = "git_rg"
+resource "azurerm_resource_group" "rgs1" {
+  name     = "github_rg"
   location = "centralindia"
 
 }
