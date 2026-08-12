@@ -17,8 +17,3 @@ resource "azurerm_resource_group" "rgs" {
   location = "centralindia"
 
 }
-resource "azurerm_resource_group" "rgs1" {
-  name     = "github_rg"
-  location = "centralindia"
-
-}
