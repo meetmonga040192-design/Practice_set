@@ -1,0 +1,39 @@
+name: Terraform PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-validation:
+    name: Terraform Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          hide-progress: true
+          format: table
+          exit-code: 1
+          severity: HIGH,CRITICAL
+
+      - name: Terraform Plan
+        run: terraform plan
